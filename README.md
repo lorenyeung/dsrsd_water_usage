@@ -1,6 +1,6 @@
-# ACWD Water Usage for Home Assistant
+# DSRSD Water Usage for Home Assistant Test
 
-The ACWD Water Usage is an integration for Home Assistant that enables users to monitor their water consumption data provided by the Alameda County Water District. This custom component fetches water usage details, billing information, and presents historical usage data in an easily digestible format within the Home Assistant UI.
+The DSRSD Water Usage is an integration for Home Assistant that enables users to monitor their water consumption data provided by the Alameda County Water District. This custom component fetches water usage details, billing information, and presents historical usage data in an easily digestible format within the Home Assistant UI.
 
 ## Features
 
