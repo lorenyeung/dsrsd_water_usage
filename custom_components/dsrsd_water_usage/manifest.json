@@ -1,10 +1,10 @@
 {
-  "domain": "acwd_water_usage",
-  "name": "ACWD Water Usage",
+  "domain": "dsrsd_water_usage",
+  "name": "DSRSD Water Usage",
   "config_flow": true,
-  "documentation": "https://github.com/parvez/acwd_water_usage",
+  "documentation": "https://github.com/lorenyeung/DSRSD_water_usage",
   "dependencies": [],
-  "codeowners": ["@parvez"],
+  "codeowners": ["@lorenyeung"],
   "requirements": ["beautifulsoup4", "requests"],
-  "version": "1.0.2"
+  "version": "1.0.0"
 }

@@ -1,2 +1,2 @@
-"""Constants for the ACWD Water Usage integration."""
-DOMAIN = "acwd_water_usage"
+"""Constants for the DSRSD Water Usage integration."""
+DOMAIN = "dsrsd_water_usage"
