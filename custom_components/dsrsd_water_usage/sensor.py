@@ -126,7 +126,7 @@ class DSRSDWaterUsage(Entity):
             has_sum=True,
             name="DSRSD Water Usage",
             source=DOMAIN,
-            statistic_id=f"{DOMAIN}:{self.meter_number}_usage",
+            statistic_id=f"{DOMAIN}:{self.account_number}_usage",
             unit_of_measurement=UnitOfVolume.GALLONS,
         )
 
