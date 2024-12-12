@@ -155,6 +155,12 @@ class DSRSDWaterUsage(Entity):
                 
                 # Update the state with the total gallons
                 self._state = total_gallons
+                projected = 0
+                current = 0
+                if self.billing_details != None {
+                    projected = self.billing_details.get("projected", {}).get("billing period", {}).get("total")
+                    current = self.billing_details.get("current", {}).get("billing period", {}).get("total")
+                }
 
                 self._attr_extra_state_attributes = {
                     "time_series": self.time_series_data,
@@ -163,8 +169,8 @@ class DSRSDWaterUsage(Entity):
                     "connect.sid": self.session.cookies.get("connect.sid"),
                     "start_date": self.dates[0],
                     "end_date": self.dates[-1],
-                    "projected_bill": self.billing_details.get("projected", {}).get("billing period", {}).get("total"),
-                    "current_bill": self.billing_details.get("current", {}).get("billing period", {}).get("total"),
+                    "projected_bill": projected,
+                    "current_bill": current,
                 }
         except Exception as e:
             _LOGGER.error("Error updating water usage data: %s", e)
