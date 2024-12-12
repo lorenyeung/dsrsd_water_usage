@@ -145,7 +145,7 @@ class DSRSDWaterUsage(Entity):
         try:
             _LOGGER.debug("Getting Time Series Data")
             #new_data = await self.hass.async_add_executor_job(self.get_water_usage, 7)  # Fetch data for 7 days
-            _LOGGER.debug("Getting Time Series Data failed get maybe: %s", new_data)
+            _LOGGER.debug("Getting Time Series Data failed get maybe" )
             if False:
                 self.update_statistics(new_data)
 
