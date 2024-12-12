@@ -155,8 +155,8 @@ class DSRSDWaterUsage(Entity):
                 
                 # Update the state with the total gallons
                 self._state = total_gallons
-                projected = 0
-                current = 0
+                projected = "0"
+                current = "0"
                 if self.billing_details != None:
                     projected = self.billing_details.get("projected", {}).get("billing period", {}).get("total")
                     current = self.billing_details.get("current", {}).get("billing period", {}).get("total")
