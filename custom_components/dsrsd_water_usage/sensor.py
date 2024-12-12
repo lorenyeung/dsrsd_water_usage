@@ -75,7 +75,7 @@ class DSRSDWaterUsage(Entity):
     def icon(self):
         return "mdi:water"
 
-    def get_water_usage(self, num_days=30):
+    def get_water_usage(self, num_days=7):
  
         """Fetch and combine water usage data for a specified number of past days."""
         login_success = self.login()
@@ -101,18 +101,22 @@ class DSRSDWaterUsage(Entity):
         for day in range(num_days, 0, -1):
             date_str = self.get_date_x_days_ago(day)
             self.dates.append(date_str)
-
+        _LOGGER.debug("Getting load usage")
         water_usage_response = self.call_load_water_usage_api(start_iso_format, end_iso_format, self.account_number)
         if water_usage_response:
             records = water_usage_response.get('timeseries', [])
             for record in records:
-                usage_date_str = record.get('startTime')
-
-                waterUseActual = record.get('waterUseActual')
-                usage_value = waterUseActual.get('gallons')
+                _LOGGER.debug("get usage based on time")
+                try: 
+                    usage_date_str = record.get('startTime')
+                    waterUseActual = record.get('waterUseActual')
+                    usage_value = waterUseActual.get('gallons')
+                except Exception as e:
+                    _LOGGER.error("Error getting water usage data record specifics: %s", e)    
                 # datetime_str = f"{usage_date_str}"
                 # datetime_obj = datetime.strptime(datetime_str, "%B %d, %Y %I:%M %p")
                 # datetime_iso_str = datetime_obj.isoformat()
+                _LOGGER.debug("append usage based on time")
                 all_records.append((usage_date_str, usage_value))
         else:
             _LOGGER.error(f"Failed to fetch water usage data for {date_str}")
@@ -144,9 +148,9 @@ class DSRSDWaterUsage(Entity):
     async def async_update(self):
         try:
             _LOGGER.debug("Getting Time Series Data")
-            #new_data = await self.hass.async_add_executor_job(self.get_water_usage, 7)  # Fetch data for 7 days
+            new_data = await self.hass.async_add_executor_job(self.get_water_usage, 7)  # Fetch data for 7 days
             _LOGGER.debug("Getting Time Series Data failed get maybe" )
-            if False:
+            if new_data:
                 self.update_statistics(new_data)
 
                 self.time_series_data.extend(new_data)
