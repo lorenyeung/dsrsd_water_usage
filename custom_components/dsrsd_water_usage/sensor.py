@@ -2,6 +2,7 @@
 import logging
 import requests
 import json
+import traceback
 from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
 from homeassistant.components.recorder.models import StatisticData, StatisticMetaData
@@ -108,11 +109,13 @@ class DSRSDWaterUsage(Entity):
             for record in records:
                 _LOGGER.debug("get usage based on time")
                 try: 
+                    #sometimes these values are NoneType?
                     usage_date_str = record.get('startTime')
                     waterUseActual = record.get('waterUseActual')
                     usage_value = waterUseActual.get('gallons')
                 except Exception as e:
-                    _LOGGER.error("Error getting water usage data record specifics: %s", e)    
+                    _LOGGER.error("Error getting water usage data record specifics: %s", e)
+                    print(traceback.format_exc())
                 # datetime_str = f"{usage_date_str}"
                 # datetime_obj = datetime.strptime(datetime_str, "%B %d, %Y %I:%M %p")
                 # datetime_iso_str = datetime_obj.isoformat()
