@@ -15,8 +15,8 @@ class DsrsdWaterUsageConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             return self.async_create_entry(title="DSRSD Water Usage", data=user_input)
 
         data_schema = vol.Schema({
-            vol.Required("username", description={"suggested_value": "Username"}): str,
-            vol.Required("password", description={"suggested_value": "Password"}): str,
+            vol.Required("username", description={"suggested_value": ""}): str,
+            vol.Required("password", description={"suggested_value": ""}): str,
         })
 
         return self.async_show_form(
