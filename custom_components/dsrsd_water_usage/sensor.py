@@ -155,6 +155,7 @@ class DSRSDWaterUsage(Entity):
                 
                 # Update the state with the total gallons
                 self._state = total_gallons
+                _LOGGER.debug("Get current billing details:", self.billing_details)
                 projected = "0"
                 current = "0"
                 if self.billing_details != None:
