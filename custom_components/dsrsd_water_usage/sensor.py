@@ -145,6 +145,7 @@ class DSRSDWaterUsage(Entity):
         try:
             _LOGGER.debug("Getting Time Series Data")
             new_data = await self.hass.async_add_executor_job(self.get_water_usage, 7)  # Fetch data for 7 days
+            _LOGGER.debug("Getting Time Series Data failed get maybe: %s", new_data)
             if new_data:
                 self.update_statistics(new_data)
 
@@ -155,7 +156,7 @@ class DSRSDWaterUsage(Entity):
                 
                 # Update the state with the total gallons
                 self._state = total_gallons
-                _LOGGER.debug("Get current billing details:", self.billing_details)
+                _LOGGER.debug("Get current billing details: %s", self.billing_details)
                 projected = "0"
                 current = "0"
                 if self.billing_details != None:
@@ -250,8 +251,6 @@ class DSRSDWaterUsage(Entity):
 
     def make_api_request(self, url, headers, data, extract_json=True):
         _LOGGER.debug(f"Sending request to URL: {url}")
-        _LOGGER.debug(f"Request headers: {headers}")
-        _LOGGER.debug(f"Request data: {data}")
 
         response = self.session.post(url, headers=headers, data=json.dumps(data))
         _LOGGER.debug(f"Response status: {response.status_code}")
@@ -274,7 +273,6 @@ class DSRSDWaterUsage(Entity):
 
     def make_get_api_request(self, url, headers, params, extract_json=True):
         _LOGGER.debug(f"Sending request to URL: {url}")
-        _LOGGER.debug(f"Request headers: {headers}")
 
         response = self.session.get(url, headers=headers, params=params)
         _LOGGER.debug(f"Response status: {response.status_code}")
