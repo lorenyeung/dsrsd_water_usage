@@ -115,7 +115,7 @@ class DSRSDWaterUsage(Entity):
                     usage_value = waterUseActual.get('gallons')
                 except Exception as e:
                     _LOGGER.error("Error getting water usage data record specifics: %s", e)
-                    print(traceback.format_exc())
+                    _LOGGER.error(traceback.format_exc())
                 # datetime_str = f"{usage_date_str}"
                 # datetime_obj = datetime.strptime(datetime_str, "%B %d, %Y %I:%M %p")
                 # datetime_iso_str = datetime_obj.isoformat()
